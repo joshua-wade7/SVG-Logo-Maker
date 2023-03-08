@@ -4,6 +4,8 @@ const inquirer = require("inquirer");
 
 const svg = require("./lib/svg");
 
+const { Shape, Circle, Square, Triangle } = require("./lib/shapes");
+
 const promptUser = () => {
   return inquirer.prompt([
     {
@@ -37,4 +39,4 @@ const promptUser = () => {
 //fs.writeFile (most likely to an index.html file)
 //
 
-promptUser(); // place this inside of a function that will fire of upon app load i.e. an init functon
+promptUser(); // place this inside of a function that will fire off upon app load i.e. an init functon
