@@ -2,36 +2,47 @@ const fs = require("fs");
 
 const inquirer = require("inquirer");
 
-const svg = require("./lib/svg");
+const Svg = require("./lib/svg");
 
-const { Shape, Circle, Square, Triangle } = require("./lib/shapes");
+const shapes = require("./lib/shapes");
 
 const promptUser = () => {
-  return inquirer.prompt([
-    {
-      type: "input",
-      name: "text",
-      message: "Enter no more than 3 characters",
-    },
-    {
-      type: "input",
-      name: "color",
-      message:
-        "Please enter a color keyword (OR a hexadecimal number) for your text color",
-    },
-    {
-      type: "list",
-      name: "shape",
-      message: "Please select a shape for your image",
-      choices: ["Circle", "Triangle", "Square"],
-    },
-    {
-      type: "input",
-      name: "shape-color",
-      message:
-        "Please enter a color keyword (OR a hexadecimal number) for your shape color",
-    },
-  ]);
+  return inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "text",
+        message: "Enter no more than 3 characters",
+      },
+      {
+        type: "input",
+        name: "textColor",
+        message:
+          "Please enter a color keyword (OR a hexadecimal number) for your text color",
+      },
+      {
+        type: "list",
+        name: "shape",
+        message: "Please select a shape for your image",
+        choices: ["Circle", "Triangle", "Square"],
+      },
+      {
+        type: "input",
+        name: "color",
+        message:
+          "Please enter a color keyword (OR a hexadecimal number) for your shape color",
+      },
+    ])
+    .then((data) => {
+      const currentShape = new shapes[data.shape](
+        data.color
+        // data.text,
+        // data.textColor
+      );
+      const generateSVG = new Svg();
+      generateSVG.setText(data.text, data.textColor).setShape(currentShape);
+      fs.writeFileSync("logo.svg", generateSVG.render());
+    });
 };
 //need to capture the user input in a .then
 //console.log the data
