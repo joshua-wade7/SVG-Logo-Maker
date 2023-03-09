@@ -42,6 +42,7 @@ const promptUser = () => {
       const generateSVG = new Svg();
       generateSVG.setText(data.text, data.textColor).setShape(currentShape);
       fs.writeFileSync("logo.svg", generateSVG.render());
+      console.log("Generated logo.svg");
     });
 };
 //need to capture the user input in a .then
