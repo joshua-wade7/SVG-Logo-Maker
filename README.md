@@ -12,9 +12,9 @@ All necessary dependancies should already be installed to be able to use this ap
 
 To use this application, enter the the command listed below in your terminal and answer each of the prompts that follow.
 
-\\\
+```
 node index.js
-\\\
+```
 
 ## Credits
 
